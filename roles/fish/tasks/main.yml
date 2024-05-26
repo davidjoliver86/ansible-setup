@@ -1,0 +1,27 @@
+---
+- name: install fish
+  become: true
+  ansible.builtin.dnf:
+    name: fish
+
+- name: install fish configs
+  ansible.builtin.copy:
+    src: ../files/conf.d/
+    dest: ~/.config/fish/conf.d/
+
+- name: ensure fish completions exist
+  ansible.builtin.file:
+    path: ~/.config/fish/completions
+    state: directory
+
+- name: download and extract starship
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/starship/starship/releases/download/v1.18.2/starship-x86_64-unknown-linux-gnu.tar.gz
+    dest: ~/.local/bin
+    creates: ~/.local/bin/starship
+
+- name: copy starship config
+  ansible.builtin.copy:
+    src: ../files/starship.toml
+    dest: ~/.config/starship.toml

@@ -1,0 +1,9 @@
+---
+- name: install cascadia fonts
+  become: true
+  ansible.builtin.dnf:
+    name: cascadia-fonts-all
+
+- name: update font cache
+  ansible.builtin.command:
+    cmd: fc-cache -rf

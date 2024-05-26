@@ -1,0 +1,6 @@
+---
+- name: setup development roles
+  hosts: localhost
+  roles:
+    - docker
+    - awscli

@@ -1,0 +1,29 @@
+---
+- name: install screen autorotate extension
+  become: true
+  ansible.builtin.dnf:
+    name: gnome-shell-extension-screen-autorotate
+
+- name: remove menu entries from cli apps
+  become: true
+  file:
+    path: /usr/share/applications/{{ item }}.desktop
+    state: absent
+  loop:
+    - fish
+    - htop
+
+- name: dconf settings
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - {key: "/org/gnome/terminal/legacy/menu-accelerator-enabled", value: "false"}
+    - {key: "/org/gnome/desktop/interface/clock-format", value: "'12h'"}
+    - {key: "/org/gnome/desktop/interface/monospace-font-name", value: "'Cascadia Mono PL 10.5'"}
+
+- name: copy gtk settings
+  ansible.builtin.copy:
+    src: ../files/gtk.css
+    dest: ~/.config/gtk-3.0/gtk.css

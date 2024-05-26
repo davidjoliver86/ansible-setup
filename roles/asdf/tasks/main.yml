@@ -1,0 +1,17 @@
+---
+- name: clone asdf
+  ansible.builtin.git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: ~/.asdf
+    version: v0.14.0
+    update: false
+
+- name: asdf fish integration
+  ansible.builtin.copy:
+    src: ../files/asdf.fish
+    dest: ~/.config/fish/conf.d/asdf.fish
+
+- name: asdf completions
+  shell:
+    cmd: ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions/asdf.fish
+    creates: ~/.config/fish/completions/asdf.fish

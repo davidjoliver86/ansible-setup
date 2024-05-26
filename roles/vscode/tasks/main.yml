@@ -1,0 +1,22 @@
+---
+- name: vscode repo
+  become: true
+  ansible.builtin.yum_repository:
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: install vscode
+  become: true
+  ansible.builtin.dnf:
+    name: code
+    update_cache: true
+
+- name: install vscode settings
+  ansible.builtin.copy:
+    src: ../files/
+    dest: ~/.config/Code/User/
+    mode: "0644"

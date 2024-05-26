@@ -1,0 +1,10 @@
+---
+- name: install screen autorotate extension
+  become: true
+  ansible.builtin.dnf:
+    name: gnome-shell-extension-screen-autorotate
+
+- name: enable autorotate extension
+  community.general.dconf:
+    key: /org/gnome/shell/enabled-extensions
+    value: "['screen-rotate@shyzus.github.io']"

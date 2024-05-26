@@ -1,0 +1,5 @@
+---
+- name: install chromium
+  become: true
+  ansible.builtin.dnf:
+    name: chromium

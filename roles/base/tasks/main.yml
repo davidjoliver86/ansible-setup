@@ -1,0 +1,29 @@
+---
+- name: install base packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - vim
+      - htop
+      - jq
+      - curl
+      - yamllint
+
+- name: make .ssh folder
+  ansible.builtin.file:
+    path: ~/.ssh
+    state: directory
+
+- name: create keypair
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id_ed25519
+    type: ed25519
+    comment: "{{ ansible_facts['nodename'] }}"
+
+- name: ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: ~/.local/bin
+    state: directory

@@ -1,0 +1,20 @@
+vte-terminal {
+    padding: 7px;
+}
+
+terminal-window notebook>header.top button {
+    padding: 1px;
+    background-image: none;
+    border: 1px;
+    margin-right: 10px;
+}
+
+terminal-window notebook>header.top>tabs>tab {
+    margin: 1px;
+    padding: 1px;
+}
+
+terminal-window notebook>header.top>tabs>tab label {
+    padding: 1px;
+    margin: 1px;
+}
