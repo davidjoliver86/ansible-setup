@@ -3,7 +3,7 @@
   hosts: localhost
   roles:
     - fonts
-    - chromium
+    - brave
     - vscode
     - flatpak/base
     - flatpak/joplin

@@ -19,7 +19,6 @@
     value: "{{ item.value }}"
     state: present
   loop:
-    - {key: "/org/gnome/terminal/legacy/menu-accelerator-enabled", value: "false"}
     - {key: "/org/gnome/desktop/interface/clock-format", value: "'12h'"}
     - {key: "/org/gnome/desktop/interface/monospace-font-name", value: "'Cascadia Mono PL 10.5'"}
 
